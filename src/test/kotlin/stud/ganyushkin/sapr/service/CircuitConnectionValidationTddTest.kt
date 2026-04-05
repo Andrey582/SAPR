@@ -51,4 +51,19 @@ class CircuitConnectionValidationTddTest {
 
         assertEquals(listOf("W1"), invalidIds)
     }
+
+    @Test
+    fun `findInvalidConnectionIds should return connection with blank signal name`() {
+        val components = listOf(
+            CircuitComponent("R1", "RESISTOR", "R1", 0, 0),
+            CircuitComponent("C1", "CAPACITOR", "C1", 10, 0),
+        )
+        val connections = listOf(
+            CircuitConnection("W1", "R1", "C1", "   "),
+        )
+
+        val invalidIds = service.findInvalidConnectionIds(components, connections)
+
+        assertEquals(listOf("W1"), invalidIds)
+    }
 }

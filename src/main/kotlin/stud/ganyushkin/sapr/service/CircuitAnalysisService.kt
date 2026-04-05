@@ -26,11 +26,21 @@ class CircuitAnalysisService {
         val componentIds = components.map { it.id }.toSet()
 
         return connections
-            .filter { connection ->
-                connection.sourceComponentId !in componentIds &&
-                    connection.targetComponentId !in componentIds ||
-                    connection.sourceComponentId == connection.targetComponentId
-            }
+            .filter { connection -> isInvalidConnection(connection, componentIds) }
             .map { it.id }
     }
+
+    private fun isInvalidConnection(connection: CircuitConnection, componentIds: Set<String>): Boolean =
+        hasMissingComponent(connection, componentIds) ||
+            isSelfLoop(connection) ||
+            hasBlankSignalName(connection)
+
+    private fun hasMissingComponent(connection: CircuitConnection, componentIds: Set<String>): Boolean =
+        connection.sourceComponentId !in componentIds || connection.targetComponentId !in componentIds
+
+    private fun isSelfLoop(connection: CircuitConnection): Boolean =
+        connection.sourceComponentId == connection.targetComponentId
+
+    private fun hasBlankSignalName(connection: CircuitConnection): Boolean =
+        connection.signalName.isBlank()
 }
