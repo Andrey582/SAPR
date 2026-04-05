@@ -3,6 +3,7 @@ plugins {
     kotlin("plugin.spring") version "2.2.21"
     id("org.springframework.boot") version "4.0.4"
     id("io.spring.dependency-management") version "1.1.7"
+    jacoco
 }
 
 group = "stud.ganyushkin"
@@ -36,4 +37,48 @@ kotlin {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+jacoco {
+    toolVersion = "0.8.13"
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+
+    classDirectories.setFrom(
+        files(
+            classDirectories.files.map {
+                fileTree(it) {
+                    include(
+                        "stud/ganyushkin/sapr/service/CircuitAnalysisService.class",
+                        "stud/ganyushkin/sapr/service/CircuitComponentService.class",
+                        "stud/ganyushkin/sapr/service/CircuitConnectionService.class",
+                    )
+                }
+            },
+        ),
+    )
+}
+
+tasks.jacocoTestCoverageVerification {
+    dependsOn(tasks.test)
+
+    classDirectories.setFrom(tasks.jacocoTestReport.get().classDirectories)
+
+    violationRules {
+        rule {
+            limit {
+                counter = "BRANCH"
+                value = "COVEREDRATIO"
+                minimum = "0.80".toBigDecimal()
+            }
+        }
+    }
 }

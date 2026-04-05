@@ -27,4 +27,26 @@ class CircuitConnectionServiceTest {
             service.createConnection("W1", source, source, "SIG_A")
         }
     }
+
+    @Test
+    fun `createConnection should reject blank id`() {
+        assertThrows(IllegalArgumentException::class.java) {
+            service.createConnection("   ", source, target, "SIG_A")
+        }
+    }
+
+    @Test
+    fun `createConnection should reject blank signal name`() {
+        assertThrows(IllegalArgumentException::class.java) {
+            service.createConnection("W1", source, target, "   ")
+        }
+    }
+
+    @Test
+    fun `createConnection should trim id and signal name`() {
+        val connection = service.createConnection("  W1  ", source, target, "  SIG_A  ")
+
+        assertEquals("W1", connection.id)
+        assertEquals("SIG_A", connection.signalName)
+    }
 }

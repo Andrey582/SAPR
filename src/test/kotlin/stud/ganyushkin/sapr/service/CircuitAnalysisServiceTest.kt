@@ -37,4 +37,31 @@ class CircuitAnalysisServiceTest {
 
         assertEquals(listOf("L1"), isolated.map { it.id })
     }
+
+    @Test
+    fun `countComponentsByType should return zero when type is absent`() {
+        val components = listOf(
+            CircuitComponent("R1", "RESISTOR", "R1", 0, 0),
+            CircuitComponent("C1", "CAPACITOR", "C1", 10, 0),
+        )
+
+        val count = service.countComponentsByType(components, "TRANSISTOR")
+
+        assertEquals(0, count)
+    }
+
+    @Test
+    fun `findIsolatedComponents should return empty list when all components are connected`() {
+        val components = listOf(
+            CircuitComponent("R1", "RESISTOR", "R1", 0, 0),
+            CircuitComponent("C1", "CAPACITOR", "C1", 10, 0),
+        )
+        val connections = listOf(
+            CircuitConnection("W1", "R1", "C1", "SIG_A"),
+        )
+
+        val isolated = service.findIsolatedComponents(components, connections)
+
+        assertEquals(emptyList<CircuitComponent>(), isolated)
+    }
 }

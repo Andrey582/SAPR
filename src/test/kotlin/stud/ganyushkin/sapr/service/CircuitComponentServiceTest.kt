@@ -36,4 +36,13 @@ class CircuitComponentServiceTest {
             service.renameComponent(component, "   ")
         }
     }
+
+    @Test
+    fun `renameComponent should reject too long label`() {
+        val component = CircuitComponent("D1", "DIODE", "D1", 0, 0)
+
+        assertThrows(IllegalArgumentException::class.java) {
+            service.renameComponent(component, "A".repeat(33))
+        }
+    }
 }
