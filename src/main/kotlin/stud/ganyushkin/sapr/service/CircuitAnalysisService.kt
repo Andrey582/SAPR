@@ -27,7 +27,7 @@ class CircuitAnalysisService {
 
         return connections
             .filter { connection ->
-                connection.sourceComponentId !in componentIds ||
+                connection.sourceComponentId !in componentIds &&
                     connection.targetComponentId !in componentIds ||
                     connection.sourceComponentId == connection.targetComponentId
             }
