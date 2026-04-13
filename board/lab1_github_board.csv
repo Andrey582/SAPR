@@ -1,0 +1,16 @@
+IssueKey,Summary,Type,Priority,StoryPoints,Sprint,Assignee,Status,Labels,DueDate
+SAPR-1,Сформировать требования к модулю ввода схемы,Story,High,3,Sprint 1,Андрей Ганюшкин,To Do,feature;high-priority,2026-03-24
+SAPR-2,Реализовать модель данных компонентов и соединений,Story,High,5,Sprint 1,Андрей Ганюшкин,To Do,feature;high-priority,2026-03-26
+SAPR-3,Добавить REST API для CRUD компонентов,Story,High,5,Sprint 1,Андрей Ганюшкин,To Do,feature;high-priority,2026-03-29
+SAPR-4,Добавить REST API для CRUD соединений,Story,High,5,Sprint 1,Андрей Ганюшкин,To Do,feature;high-priority,2026-03-31
+SAPR-5,Реализовать валидацию схемы,Story,High,8,Sprint 1,Андрей Ганюшкин,To Do,feature;high-priority,2026-04-03
+SAPR-8,Покрыть сервисы unit-тестами,Task,High,5,Sprint 1,Андрей Ганюшкин,To Do,tech-debt,2026-04-05
+SAPR-11,Обработать ошибки в API,Story,Medium,3,Sprint 1,Андрей Ганюшкин,To Do,feature,2026-04-04
+SAPR-6,Добавить импорт схемы из JSON,Story,Medium,5,Backlog,Андрей Ганюшкин,Backlog,feature,
+SAPR-7,Добавить экспорт схемы из JSON,Story,Medium,3,Backlog,Андрей Ганюшкин,Backlog,feature,
+SAPR-9,Настроить интеграционные тесты API,Task,Medium,5,Backlog,Андрей Ганюшкин,Backlog,tech-debt,
+SAPR-10,Подготовить Swagger OpenAPI документацию,Task,Medium,3,Backlog,Андрей Ганюшкин,Backlog,documentation,
+SAPR-12,Добавить логирование операций над схемой,Task,Low,2,Backlog,Андрей Ганюшкин,Backlog,feature,
+SAPR-13,Настроить CI сборка и тесты,Task,Medium,3,Backlog,Андрей Ганюшкин,Backlog,tech-debt,
+SAPR-14,Подготовить пользовательскую инструкцию,Task,Low,2,Backlog,Андрей Ганюшкин,Backlog,documentation,
+SAPR-15,Исправить дефекты по результатам тестирования,Bug,High,5,Backlog,Андрей Ганюшкин,Backlog,bug;high-priority,

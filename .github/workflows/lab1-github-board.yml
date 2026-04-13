@@ -1,0 +1,33 @@
+name: Lab 1 GitHub Board
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/lab1-github-board.yml"
+      - "board/lab1_github_board.csv"
+      - "scripts/generate_lab1_github_board.sh"
+      - "docs/lab1_github_actions_board_report.md"
+
+jobs:
+  build-lab1-board:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate board snapshot
+        run: |
+          chmod +x scripts/generate_lab1_github_board.sh
+          ./scripts/generate_lab1_github_board.sh
+
+      - name: Publish workflow summary
+        run: cat build/lab1-board/lab1_github_board_snapshot.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload board artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lab1-github-board
+          path: build/lab1-board
+          if-no-files-found: error
